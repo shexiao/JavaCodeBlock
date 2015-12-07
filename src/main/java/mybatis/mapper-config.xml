@@ -1,0 +1,112 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sample.mapper.AnimalsMapper">
+	<!-- 
+		<cache-ref/>
+		<cache/>
+		<resultMap/>
+		<parameterMap/>
+		<sql/>
+		<insert/>
+		<update/>
+		<delete/>
+		<select/>
+	 -->
+	<cache-ref namespace=""/>
+	
+	<!-- 
+		eviction: LRU | FIFO | SOFT | WEAK
+		<cache eviction="FIFO" flushInterval="60000" size="512" readOnly="true"/>
+		自定义
+		<cache type="sample.XXXCache"/>
+	 -->
+	<cache eviction="LRU" flushInterval="" size="1024" readOnly="true"></cache>
+    
+	<resultMap id="userResultMap" type="User">
+	  <id property="id" column="user_id" />
+	  <result property="username" column="user_name"/>
+	  <result property="password" column="hashed_password"/>
+	</resultMap>
+    
+	<parameterMap type="" id=""></parameterMap>
+	 
+	<!--
+		${}不转义，不能修改
+		#{}预编译语句，安全	
+		 定义可重用sql       
+		 使用：<include refid="reusesql"><property name="table" value="person"></include>
+	-->
+	<sql id="reusesql">
+	    ${table}.id,${table}.username
+	</sql>
+	 
+	<!--
+	  <insert 
+	      id=""
+	      parameterType=""
+	      flushCache="true"
+	      statementType="PREPARED"
+	      keyProperty=""
+	      keyColumn=""
+	      useGeneratedKeys="true"
+	      timeout="20">
+	-->
+	<insert id="insert" parameterType="xx">
+		<![CDATA[
+	
+	]]>
+	</insert>
+	 
+	<!--
+	  <update 
+	      id=""
+	      parameterType=""
+	      flushCache=""
+	      statementType=""
+	      timeout="20">
+	-->
+	<update id="">
+		<![CDATA[]]>
+	</update>
+	   
+	  <!--
+	  <delete 
+	      id=""
+	      parameterType=""
+	      flushCache=""
+	      statementType=""
+	      timeout="20">
+	-->
+	<delete id="delete" parameterType="xx">
+	</delete>
+	
+	<!--
+	  <select 
+	      id=""
+	      parameterType=""
+	      resultType=""
+	      resultMap=""
+	      flushCache="false"
+	      useCache="true"
+	      timeout="10000"
+	      fetchSize="256"
+	      statementType="PREPARED"
+	      resultSetType="FORWARD_ONLY">
+	-->
+	<select id="methodName" parameterType="xx" resultType="yy">
+	    <![CDATA[
+	      select * from xx where id=#{id}
+	  ]]>
+	</select>
+	
+	<!-- 
+		动态SQL
+		if: <if test="test != null"></if>
+		choose,when,otherwise: <choose><when test=""></when><when test=""></when><otherwise></otherwise></choose>
+		trim,where,set: 
+		foreach: <foreach collection="" item="" index="" open="" close="" separator=""></foreach>
+		bind:
+	 -->
+</mapper>

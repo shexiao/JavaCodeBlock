@@ -1,0 +1,50 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.example.basic.AnimalsMapper">
+    
+	<resultMap id="AnimalsMap" type="Animals">
+	  <id property="id" column="id" />
+	  <result property="type" column="type"/>
+	  <result property="name" column="name"/>
+	</resultMap>
+    
+	<sql id="reusesql">
+	    ${table}.id,${table}.name,${table}.type
+	</sql>
+	
+	 
+	<insert id="insert" parameterType="Animals" useGeneratedKeys="true" keyProperty="id">
+		<![CDATA[
+			insert into animals(type, name) values(#{type}, #{name})
+		]]>
+	</insert>
+	
+	<insert id="insertlist" parameterType="List">
+			insert into animals(id,type, name) values
+			<foreach collection="list" item="item" open="(" separator="),(" close=")">
+				#{item.id},#{item.type}, #{item.name}
+			</foreach>	
+	</insert>
+	
+	<update id="update" parameterType="Integer">
+		<![CDATA[
+		]]>
+	</update>
+	   
+	<delete id="delete" parameterType="Integer">
+	</delete>
+
+	<select id="query" parameterType="Integer" resultMap="AnimalsMap">
+	    <![CDATA[
+	     	select 
+	  	]]>
+	  	<include refid="reusesql">
+	  		<property name="table" value="animals"/>
+	  	</include>
+	  	<![CDATA[
+	  		from animals where id=#{id}
+	  	]]>
+	</select>
+</mapper>
