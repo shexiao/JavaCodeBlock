@@ -3,11 +3,42 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
-        
+    
 	
+	<!-- 
+		bean:
+			class
+			scope
+			constructor-arguments
+			properties
+			autowiring-mode
+			lazy-initialization-mode
+			initialization-method
+			destruction-method
+	
+		alias: <alias name="student" alias="stu"/>
+	 -->
+	 
+	 <import resource="bean-basic-constructor-arg.xml"/>
+	
+	<!-- init with constructor -->
 	<bean id="student" class="spring.bean.xml.basic.Student">
 		<property name="name" value="xiaozu"/>
 		<property name="height" value="1.6"/>
 	</bean>
+	<alias name="student" alias="stu"/>
+	
+	<!-- init with factory-method -->
+	<bean id="student1" class="spring.bean.xml.basic.Student" factory-method="createInstance">
+		<property name="name" value="xiaoxiao"/>
+		<property name="height" value="2.0"/>
+	</bean>
 
+	<!-- init with instance factory method -->
+	<bean id="studentFactory" class="spring.bean.xml.basic.StudentFactory">
+	</bean>
+	<bean id="student2" factory-bean="studentFactory" factory-method="createStudent">
+		<property name="name" value="zuzu"/>
+		<property name="height" value="2.1"/>
+	</bean>
 </beans>

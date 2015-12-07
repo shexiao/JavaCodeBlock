@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 
+		constructor-arg:
+			name: arg name
+			index: 0 arg, 1th arg..
+			type: int, java.lang.String
+			value: 
+			ref: bean
+	 -->
+	<bean id="student_arg" class="spring.bean.xml.basic.Student">
+		<constructor-arg name="name" value="shshe"/>
+		<constructor-arg name="height" value="3.0"/>
+		<constructor-arg name="info" ref="info"/>
+	</bean>
+	
+	<bean id="info" class="spring.bean.xml.basic.Info">
+		<constructor-arg name="info" value="test info"/>
+	</bean>
+</beans>
