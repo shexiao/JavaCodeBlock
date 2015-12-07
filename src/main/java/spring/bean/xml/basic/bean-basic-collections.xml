@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="basicCollections" class="spring.bean.xml.basic.BasicCollections">
+    	<property name="properties">
+    		<props>
+    			<prop key="name">shexiao</prop>
+    			<prop key="age">24</prop>
+    		</props>
+    	</property>
+    	<property name="list">
+    		<list>
+    			<value>xiaozu</value>
+    			<value>yy</value>
+    		</list>
+    	</property>	
+    	<property name="map">
+    		<map>
+    			<entry key="name" value="xiaoxiao"/>
+    			<entry key="age" value="11"/>
+    		</map>
+    	</property>
+    	<property name="set">
+    		<set>
+    			<value>hehe</value>
+    			<value>ccc</value>
+    		</set>
+    	</property>
+    </bean>
+</beans>

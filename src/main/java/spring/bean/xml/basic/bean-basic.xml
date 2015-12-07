@@ -17,9 +17,23 @@
 			destruction-method
 	
 		alias: <alias name="student" alias="stu"/>
+		
+		xmlns:c="http://www.springframework.org/schema/p
+		property:p-shortcut: p:name=value or p:name-ref=value
+		xmlns:c="http://www.springframework.org/schema/c
+		constructor:c-shortcut: c:name=value or c:name-ref=value
+		
+		depends-on: init after
+		
+		lazy-init: init when first request: <beans default-lazy-init="true">
+		
+		autowire: no | byName | byType | constructor
+		
+		scope: singleton | prototype | request | session | global session | application
 	 -->
 	 
 	 <import resource="bean-basic-constructor-arg.xml"/>
+	 <import resource="bean-basic-collections.xml"/>
 	
 	<!-- init with constructor -->
 	<bean id="student" class="spring.bean.xml.basic.Student">

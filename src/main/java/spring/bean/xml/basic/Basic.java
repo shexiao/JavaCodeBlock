@@ -21,5 +21,12 @@ public class Basic {
 		Student stu_arg = ctx.getBean("student_arg", Student.class);
 		System.out.println(stu_arg.toString());
 		System.out.println(stu_arg.getInfo().getInfo());
+		
+		//bean collections
+		BasicCollections bc = ctx.getBean("basicCollections", BasicCollections.class);
+		System.out.println(bc.getProperties().getProperty("name"));
+		System.out.println(bc.getList().get(0));
+		System.out.println(bc.getMap().get("name"));
+		System.out.println(bc.getSet().size());
 	}
 }
