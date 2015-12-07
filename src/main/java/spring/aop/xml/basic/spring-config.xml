@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<bean id="serviceBean" class="spring.aop.xml.basic.ServiceBean"/>
+	<bean id="aspectBean" class="spring.aop.xml.basic.AspectBean"/>
+	
+	
+	<!-- 
+	0.the most important thing is the rule.
+	1.define a <aop:aspect> ref a bean
+	2.define a pointcut
+	3.define a advice ref the pointcut
+	4.if don't define pointput, define a advice with a pointput
+	5.all object must be spring bean
+	6.the same as annotation mode, the service bean do nothing for the aop config
+	 -->
+	<aop:config>
+		<aop:aspect id="aspectBeanId" ref="aspectBean">
+			<aop:pointcut expression="execution(* spring.aop.xml.basic.*.*(..))" id="serviceAspect"/>
+			<aop:before method="doBefore" pointcut-ref="serviceAspect"/>
+			<aop:after method="doAfter" pointcut="execution(* spring.aop.xml.basic.*.*(..))"/>
+		</aop:aspect>
+	</aop:config>
+</beans>
