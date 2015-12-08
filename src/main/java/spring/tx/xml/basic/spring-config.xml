@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
+    
+  	<!-- 
+  	tx xml config need 4 step:
+  	0.define a dataSource
+  	1.define a transactionManager with step 0's dataSource
+  	2.define a <tx:advice> with unique id and ref the transactionManager
+  	3.define a aop pointcut and a aop advice ref step 2 unique id
+  	
+  	<tx:method> properties:
+  	0. name: must set 
+  	1. propagation: default REQUIRED
+  	2. isolation: default DEFAULT
+  	3. timeout: defautl -1
+  	4. read-only: default false
+  	5. rollback-for: set Exceptions
+  	6. no-rollback-for: set Exceptions
+  	 -->    
+        
+    <!-- 配置javabean注解 -->
+	<context:component-scan base-package="spring.tx.xml.basic"/>
+	<!-- or <context:annotation-config/> -->
+	
+	<bean id="AnimalsService" class="spring.tx.xml.basic.AnimalsServiceImpl"></bean>
+	
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="drive" value="com.mysql.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql://localhost:3306/dbname"/>
+		<property name="username" value="root"/>
+		<property name="password" value="root"/>
+	</bean>
+	
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="get*" read-only="true"/>
+			<tx:method name="*"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	<aop:config>
+		<aop:pointcut expression="execution(* spring.tx.xml.basic.AnimalsService.*(..))" id="animalsServicePc"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="animalsServicePc"/>
+	</aop:config>
+</beans>

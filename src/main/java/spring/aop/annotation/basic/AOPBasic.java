@@ -4,6 +4,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
+ * import aspectjweaver.jar
+ * 
  * 0.the most important thing is the rule.
  * 1.config file set <aop:aspectj-autoproxy/>
  * 2.define class with annotation @Aspect

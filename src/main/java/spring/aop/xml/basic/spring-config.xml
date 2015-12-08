@@ -15,6 +15,8 @@
 	
 	
 	<!-- 
+	import aspectjweaver.jar
+	
 	0.the most important thing is the rule.
 	1.define a <aop:aspect> ref a bean
 	2.define a pointcut
