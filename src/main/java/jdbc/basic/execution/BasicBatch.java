@@ -15,6 +15,8 @@ import jdbc.basic.connection.BasicConnection;
  *4. execute the statement
  *5. handle batch exception(?): when a select sql was added or update sql throw a exception 
  *
+ *
+ *ps. Here use Transaction
  */
 
 public class BasicBatch {
